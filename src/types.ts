@@ -1,3 +1,7 @@
+import { filters } from './contants';
+
+export type FilterType = (typeof filters)[number];
+
 export type TodoType = {
   id: number;
   title: string;
@@ -5,5 +9,10 @@ export type TodoType = {
 };
 
 export type ContextType = {
-  todos:TodoType[], error:string | null, loading: boolean | null }
-}
+  todos: TodoType[];
+  activeTodos: TodoType[];
+  completedTodos: TodoType[];
+  todosError: string | null;
+  loading: boolean | null;
+  handleFetch: (shouldFetch: boolean) => void;
+};
