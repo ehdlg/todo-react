@@ -1,15 +1,16 @@
 import TodoList from './components/TodoList';
 import Header from './components/Header';
-import './App.css';
-import AddTodo from './components/AddTodo';
+import NewTodo from './components/NewTodo';
+import TodoProvider from './context/ContextProvider';
+import './styles/index.css';
 
 function App() {
   return (
-    <>
+    <TodoProvider>
       <Header />
-      <AddTodo />
+      <NewTodo />
       <TodoList />
-    </>
+    </TodoProvider>
   );
 }
 
