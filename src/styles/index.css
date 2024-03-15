@@ -1,5 +1,137 @@
+/* Base */
+
 html {
   box-sizing: border-box;
+}
+
+:root {
+  --primary: rgb(172, 201, 236);
+  --accent: rgb(189, 172, 236);
+}
+:root[data-theme='light'] {
+  --text-50: rgb(234, 243, 250);
+  --text-100: rgb(213, 232, 246);
+  --text-200: rgb(171, 208, 237);
+  --text-300: rgb(130, 185, 227);
+  --text-400: rgb(88, 162, 218);
+  --text-500: rgb(46, 138, 209);
+  --text-600: rgb(37, 111, 167);
+  --text-700: rgb(28, 83, 125);
+  --text-800: rgb(18, 55, 84);
+  --text-900: rgb(9, 28, 42);
+  --text: rgb(5, 14, 21);
+
+  --background: #fff;
+
+  --background-50: rgb(235, 241, 250);
+  --background-100: rgb(214, 228, 245);
+  --background-200: rgb(173, 201, 235);
+  --background-300: rgb(133, 174, 224);
+  --background-400: rgb(92, 147, 214);
+  --background-500: rgb(51, 120, 204);
+  --background-600: rgb(41, 96, 163);
+  --background-700: rgb(31, 72, 122);
+  --background-800: rgb(20, 48, 82);
+  --background-900: rgb(10, 24, 41);
+  --background-950: rgb(5, 12, 20);
+
+  --primary-50: rgb(234, 241, 250);
+  --primary-100: rgb(213, 228, 246);
+  --primary-200: rgb(172, 201, 236);
+  --primary-300: rgb(130, 174, 227);
+  --primary-400: rgb(89, 147, 217);
+  --primary-500: rgb(47, 119, 208);
+  --primary-600: rgb(38, 96, 166);
+  --primary-700: rgb(28, 72, 125);
+  --primary-800: rgb(19, 48, 83);
+  --primary-900: rgb(9, 24, 42);
+  --primary-950: rgb(5, 12, 21);
+
+  --secondary-50: rgb(236, 234, 250);
+  --secondary-100: rgb(218, 214, 245);
+  --secondary-200: rgb(181, 172, 236);
+  --secondary-300: rgb(144, 131, 226);
+  --secondary-400: rgb(107, 90, 216);
+  --secondary-500: rgb(70, 48, 207);
+  --secondary-600: rgb(56, 39, 165);
+  --secondary-700: rgb(42, 29, 124);
+  --secondary-800: rgb(28, 19, 83);
+  --secondary-900: rgb(14, 10, 41);
+  --secondary-950: rgb(7, 5, 21);
+
+  --accent-50: rgb(239, 234, 250);
+  --accent-100: rgb(222, 213, 246);
+  --accent-200: rgb(189, 172, 236);
+  --accent-300: rgb(156, 130, 227);
+  --accent-400: rgb(123, 89, 217);
+  --accent-500: rgb(90, 47, 208);
+  --accent-600: rgb(72, 38, 166);
+  --accent-700: rgb(54, 28, 125);
+  --accent-800: rgb(36, 19, 83);
+  --accent-900: rgb(18, 9, 42);
+  --accent-950: rgb(9, 5, 21);
+}
+:root[data-theme='dark'] {
+  --text-100: rgb(5, 15, 21);
+  --text-100: rgb(10, 29, 41);
+  --text-200: rgb(19, 58, 83);
+  --text-300: rgb(29, 88, 124);
+  --text-400: rgb(39, 117, 165);
+  --text-500: rgb(48, 146, 207);
+  --text-600: rgb(90, 168, 216);
+  --text-700: rgb(131, 190, 226);
+  --text-800: rgb(172, 211, 236);
+  --text-900: rgb(214, 233, 245);
+  --text: rgb(234, 244, 250);
+
+  --background: rgb(10, 24, 41);
+
+  --background-100: rgb(10, 24, 41);
+  --background-200: rgb(20, 48, 82);
+  --background-300: rgb(31, 72, 122);
+  --background-400: rgb(41, 96, 163);
+  --background-500: rgb(51, 120, 204);
+  --background-600: rgb(92, 147, 214);
+  --background-700: rgb(133, 174, 224);
+  --background-800: rgb(173, 201, 235);
+  --background-900: rgb(214, 228, 245);
+  --background-950: rgb(235, 241, 250);
+
+  --primary-50: rgb(5, 12, 21);
+  --primary-100: rgb(9, 24, 42);
+  --primary-200: rgb(19, 48, 83);
+  --primary-300: rgb(28, 72, 125);
+  --primary-400: rgb(38, 96, 166);
+  --primary-500: rgb(47, 119, 208);
+  --primary-600: rgb(89, 147, 217);
+  --primary-700: rgb(130, 174, 227);
+  --primary-800: rgb(172, 201, 236);
+  --primary-900: rgb(213, 228, 246);
+  --primary-950: rgb(234, 241, 250);
+
+  --secondary-50: rgb(7, 5, 21);
+  --secondary-100: rgb(14, 10, 41);
+  --secondary-200: rgb(28, 19, 83);
+  --secondary-300: rgb(42, 29, 124);
+  --secondary-400: rgb(56, 39, 165);
+  --secondary-500: rgb(70, 48, 207);
+  --secondary-600: rgb(107, 90, 216);
+  --secondary-700: rgb(144, 131, 226);
+  --secondary-800: rgb(181, 172, 236);
+  --secondary-900: rgb(218, 214, 245);
+  --secondary-950: rgb(236, 234, 250);
+
+  --accent-50: rgb(9, 5, 21);
+  --accent-100: rgb(18, 9, 42);
+  --accent-200: rgb(36, 19, 83);
+  --accent-300: rgb(54, 28, 125);
+  --accent-400: rgb(72, 38, 166);
+  --accent-500: rgb(90, 47, 208);
+  --accent-600: rgb(123, 89, 217);
+  --accent-700: rgb(156, 130, 227);
+  --accent-800: rgb(189, 172, 236);
+  --accent-900: rgb(222, 213, 246);
+  --accent-950: rgb(239, 234, 250);
 }
 
 #root {
@@ -11,18 +143,73 @@ html {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #f3f3f3;
   min-height: 100vh;
   display: flex;
+  background-color: white;
   flex-direction: column;
 }
-
+/* Main */
 main {
-  padding: 2rem;
-  background-color: #fff;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 3rem;
+  background-color: #fefefe;
+  box-shadow: var(--accent) 2px 4px 24px;
   margin: 2rem;
   border-radius: 1rem;
-  min-height: 500px;
+  min-height: 700px;
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Header */
+h1 {
+  font-size: 72px;
+  background: -webkit-linear-gradient(var(--accent), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+/* NewTodo */
+
+.add-todo {
+  border-radius: 2rem;
+  padding: 1rem;
+  display: flex;
+  background-color: var(--accent-50);
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  width: 80%;
+}
+
+input[type='text']:focus .add-todo {
+  border: 5px solid green;
+}
+
+.add-todo input[type='text'] {
+  background-color: inherit;
+  border-radius: inherit;
+  outline: none;
+  border: none;
+  font-size: 1.25rem;
+  flex-basis: 90%;
+}
+.add-todo:has(input[type='text']:focus) {
+  border: 1px solid var(--accent-200);
+}
+.add-todo button {
+  width: 50px;
+  height: 50px;
+  color: var(--accent);
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 2rem;
+  transition: 0.3s ease-in-out;
+}
+
+.add-todo button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
