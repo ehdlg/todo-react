@@ -4,7 +4,6 @@ import { type TodoType } from '../types';
 function useGetTodos() {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [todosError, setTodoError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState(true);
 
   const handleFetch = (newShouldFetch: boolean) => {
@@ -13,8 +12,6 @@ function useGetTodos() {
 
   useEffect(() => {
     if (!shouldFetch) return;
-
-    setLoading(true);
 
     fetch('http://localhost:3000/api/todo')
       .then(async (response) => {
@@ -25,17 +22,19 @@ function useGetTodos() {
 
         return response.json();
       })
-      .then((data) => setTodos(data))
+      .then((data) => {
+        if (null == data) return setTodoError('Could not connect to the database');
+
+        setTodos(data);
+      })
       .catch(() => setTodoError('Could not connect to the database.'))
       .finally(() => {
-        setLoading(false);
         handleFetch(false);
       });
   }, [shouldFetch]);
 
   return {
     todos,
-    loading,
     todosError,
     handleFetch,
   };
