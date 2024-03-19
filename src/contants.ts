@@ -1,5 +1,15 @@
 export const filters = ['all', 'active', 'completed'] as const;
 
+export const toasterOptions: {
+  richColors: boolean;
+  position: 'top-right';
+  closeButton: boolean;
+} = {
+  richColors: true,
+  position: 'top-right',
+  closeButton: true,
+};
+
 export const placeholderTasks = [
   'Read a book',
   'Work on personal project',
