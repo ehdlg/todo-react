@@ -10,9 +10,6 @@ export type TodoType = {
 
 export type ContextType = {
   todos: TodoType[];
-  activeTodos: TodoType[];
-  completedTodos: TodoType[];
   todosError: string | null;
-  loading: boolean | null;
   handleFetch: (shouldFetch: boolean) => void;
 };
