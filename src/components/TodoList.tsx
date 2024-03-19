@@ -3,15 +3,16 @@ import Error from './Error';
 import Todo from './Todo';
 import { filters } from '../contants';
 import TodoContext from '../context/context';
-import { deleteTodos } from './lib/db';
+import { deleteTodos } from '../lib/db';
 import { FilterType, TodoType } from '../types';
-import { filterTodos } from './lib/filterTodo';
+import { filterTodos } from '../lib/filterTodo';
+import { toast } from 'sonner';
 
 const Content = ({ filteredTodos }: { filteredTodos: TodoType[] }) => {
   const noTodos = filteredTodos.length === 0;
 
   return (
-    <>
+    <div className='todo-list'>
       {noTodos ? (
         <h2>There are no todos with the current filter.</h2>
       ) : (
@@ -19,15 +20,25 @@ const Content = ({ filteredTodos }: { filteredTodos: TodoType[] }) => {
           return <Todo key={todo.id} todo={todo} />;
         })
       )}
-    </>
+    </div>
   );
 };
 
-const Filters = ({ handleFilter }: { handleFilter: (newFilter: FilterType) => void }) => {
+const Filters = ({
+  currentFilter,
+  handleFilter,
+}: {
+  currentFilter: FilterType;
+  handleFilter: (newFilter: FilterType) => void;
+}) => {
   return (
     <div className='todo-list-footer__filter'>
       {filters.map((filter: FilterType) => (
-        <button key={filter} onClick={() => handleFilter(filter)}>
+        <button
+          className={`filter ${currentFilter === filter ? 'filter-selected' : ''}`}
+          key={filter}
+          onClick={() => handleFilter(filter)}
+        >
           {filter}
         </button>
       ))}
@@ -37,23 +48,23 @@ const Filters = ({ handleFilter }: { handleFilter: (newFilter: FilterType) => vo
 
 const Footer = ({
   deleteCompletedTodos,
-  shouldShowDeleteButton,
+  todosLeft,
   handleFilter,
+  currentFilter,
 }: {
   deleteCompletedTodos: () => void;
-  shouldShowDeleteButton: boolean;
+  todosLeft: number;
   handleFilter: (newFilter: FilterType) => void;
+  currentFilter: FilterType;
 }) => {
   return (
     <div className='todo-list-footer'>
-      <button
-        className={`todo-list-footer__delete_all ${shouldShowDeleteButton ? '' : 'hidden'}`}
-        onClick={deleteCompletedTodos}
-      >
-        Delete completed todos
-      </button>
+      <span>{todosLeft} todos left</span>
 
-      <Filters handleFilter={handleFilter} />
+      <Filters handleFilter={handleFilter} currentFilter={currentFilter} />
+      <button className='todo-list-footer__delete_all' onClick={deleteCompletedTodos}>
+        Clear completed
+      </button>
     </div>
   );
 };
@@ -70,28 +81,39 @@ function TodoList() {
 
   const filteredTodos = filterTodos[currentFilter](todos);
   const completedTodos = filterTodos.completed(todos);
-  const shouldShowDeleteButton = currentFilter !== 'active' && completedTodos.length > 0;
+  const activeTodos = filterTodos.active(todos);
 
   const handleFilter = (newFilter: FilterType) => {
     setCurrentFilter(newFilter);
   };
 
   const deleteCompletedTodos = () => {
+    if (completedTodos.length === 0) {
+      toast.info('There are no completed todos to clear!');
+      return;
+    }
+
+    const todosIds = completedTodos.map((todo) => todo.id);
+
+    console.log({ todosIds });
     deleteTodos(
       completedTodos.map((todo) => todo.id),
       handleFetch
     );
+
+    toast.success('Succesfully cleared all the completed todos!');
   };
 
   return (
-    <div className='todo-list'>
+    <>
       <TodoList.Content filteredTodos={filteredTodos} />
       <TodoList.Footer
         deleteCompletedTodos={deleteCompletedTodos}
-        shouldShowDeleteButton={shouldShowDeleteButton}
+        todosLeft={activeTodos.length}
         handleFilter={handleFilter}
+        currentFilter={currentFilter}
       />
-    </div>
+    </>
   );
 }
 
