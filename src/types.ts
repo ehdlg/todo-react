@@ -1,4 +1,4 @@
-import { filters } from './contants';
+import { filters } from './constants';
 
 export type FilterType = (typeof filters)[number];
 

@@ -1,3 +1,5 @@
+export const URL = import.meta.env.VITE_API_URL;
+
 export const filters = ['all', 'active', 'completed'] as const;
 
 export const toasterOptions: {

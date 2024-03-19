@@ -2,6 +2,7 @@ import { useContext, useRef } from 'react';
 import TodoContext from '../context/context';
 import { validateNewTodo } from '../utils/validation';
 import { toast } from 'sonner';
+import { URL } from '../constants';
 
 function NewTodo() {
   const { handleFetch, todosError } = useContext(TodoContext);
@@ -24,7 +25,7 @@ function NewTodo() {
       body: JSON.stringify({ title }),
     };
 
-    const response = await fetch('http://localhost:3000/api/todo', fetchOptions);
+    const response = await fetch(`${URL}/todo`, fetchOptions);
 
     const data = await response.json();
 

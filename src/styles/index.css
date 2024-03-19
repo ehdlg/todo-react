@@ -163,7 +163,7 @@ main {
 }
 /* Header */
 h1 {
-  font-size: 72px;
+  font-size: 4rem;
   background: -webkit-linear-gradient(var(--accent), var(--primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -12,7 +12,7 @@ export const completeTodo = async (todo: TodoType, handleFetch: (shouldFetch: bo
   handleFetch(true);
 };
 
-export const deleteTodos = (ids: number[], handleFetch: (shouldFetch: boolean) => void) => {
+export const deleteTodos = async (ids: number[], handleFetch: (shouldFetch: boolean) => void) => {
   if (ids.length === 0) return;
 
   const fetchOptions = {
@@ -21,15 +21,17 @@ export const deleteTodos = (ids: number[], handleFetch: (shouldFetch: boolean) =
 
   if (!confirm('Are you sure you want to clear all the completed todos?')) return;
 
-  ids.forEach(async (id) => {
+  const fetchPromises = ids.map(async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/api/todo/${id}`, fetchOptions);
       const data = await response.json();
-      if (response.status !== 200) console.error(data.error);
+      if (response.status !== 200) console.error(data.message);
     } catch (e) {
       console.error(e);
     }
   });
 
-  handleFetch(true);
+  Promise.all(fetchPromises)
+    .then(() => handleFetch(true))
+    .catch(() => console.error('Something went wrong'));
 };

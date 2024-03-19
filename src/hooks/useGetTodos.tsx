@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { type TodoType } from '../types';
+import { URL } from '../constants';
 
 function useGetTodos() {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -13,7 +14,7 @@ function useGetTodos() {
   useEffect(() => {
     if (!shouldFetch) return;
 
-    fetch('http://localhost:3000/api/todo')
+    fetch(URL + '/todo')
       .then(async (response) => {
         if (response.status !== 200) {
           const { error } = await response.json();

@@ -4,7 +4,7 @@ import Header from './components/Header';
 import NewTodo from './components/NewTodo';
 import TodoProvider from './context/ContextProvider';
 import { Toaster } from 'sonner';
-import { toasterOptions } from './contants';
+import { toasterOptions } from './constants';
 import './styles/index.css';
 
 function App() {

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import Error from './Error';
 import Todo from './Todo';
-import { filters } from '../contants';
+import { filters } from '../constants';
 import TodoContext from '../context/context';
 import { deleteTodos } from '../lib/db';
 import { FilterType, TodoType } from '../types';
