@@ -1,12 +1,13 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import TodoContext from '../context/context';
-import { placeholderTasks } from '../contants';
-import Error from './Error';
+import { validateNewTodo } from '../utils/validation';
+import { toast } from 'sonner';
 
 function NewTodo() {
-  const [error, setError] = useState<null | string>(null);
-  const { handleFetch } = useContext(TodoContext);
-  const inputRef = useRef(null);
+  const { handleFetch, todosError } = useContext(TodoContext);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  if (todosError) return null;
 
   const addNewTodo = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -15,10 +16,7 @@ function NewTodo() {
 
     const title = inputRef.current.value;
 
-    if (!title) {
-      setError('You must write a title for the todo');
-      return;
-    }
+    if (!validateNewTodo(title)) return;
 
     const fetchOptions = {
       method: 'POST',
@@ -30,9 +28,9 @@ function NewTodo() {
 
     const data = await response.json();
 
-    if (response.status !== 200) {
-      setError(data.error);
-    }
+    const toastType = response.status === 200 ? 'success' : 'error';
+
+    toast[toastType](data.message);
 
     handleFetch(true);
 
@@ -41,14 +39,12 @@ function NewTodo() {
 
   return (
     <>
-      <form className='add-todo'>
+      <form className='new-todo'>
         <input
           type='text'
           name='new-todo'
           id='new-todo'
-          placeholder={`${
-            placeholderTasks[Math.floor(placeholderTasks.length * Math.random())]
-          }...`}
+          placeholder={'Create a new todo...'}
           ref={inputRef}
         />
 
@@ -56,7 +52,6 @@ function NewTodo() {
           +
         </button>
       </form>
-      {error && <Error msg={error} />}
     </>
   );
 }
